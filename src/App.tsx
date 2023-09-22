@@ -1,14 +1,8 @@
-import WheelPicker from "./WheelPicker/WheelPicker";
-import { hours, minutes } from "./data/time";
 import "./App.css";
+import TimePickers from "./components/TimePickers/TimePickers";
 
 const App = () => {
-  return (
-    <div style={{ display: "flex" }}>
-      <WheelPicker items={hours} name="hours" />
-      <WheelPicker items={minutes} name="minutes" />
-    </div>
-  );
+  return <TimePickers />;
 };
 
 export default App;

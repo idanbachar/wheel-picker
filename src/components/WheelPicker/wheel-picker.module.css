@@ -5,6 +5,11 @@
   max-height: 30vh;
   overflow: auto;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-inline-start: 0;
 }
 
 .wheelPicker::-webkit-scrollbar {
@@ -12,6 +17,6 @@
 }
 
 .wheelItem {
-  height: 2.2rem;
-  line-height: 2.2rem;
+  border-radius: 0;
+  color: white;
 }
