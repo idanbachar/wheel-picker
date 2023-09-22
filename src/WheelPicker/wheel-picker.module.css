@@ -1,0 +1,17 @@
+.wheelPicker {
+  list-style-type: none;
+  font-size: 2rem;
+  text-align: center;
+  max-height: 30vh;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.wheelPicker::-webkit-scrollbar {
+  width: 0;
+}
+
+.wheelItem {
+  height: 2.2rem;
+  line-height: 2.2rem;
+}
