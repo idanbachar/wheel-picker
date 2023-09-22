@@ -7,12 +7,12 @@ import {
 } from "../../services/wheelPickerService";
 
 const WheelPicker: React.FC<IWheelPicker> = (props) => {
-  const { name, items, defaultItemIndex } = props;
+  const { name, items, defaultItemIndex, onChange } = props;
   const wheelPickerRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     ScrollWheelToIndex(defaultItemIndex || 0, items, wheelPickerRef.current!);
-    StartListenForWheelPickerScoll(wheelPickerRef.current!);
+    StartListenForWheelPickerScoll(wheelPickerRef.current!, onChange);
   }, []);
 
   return (

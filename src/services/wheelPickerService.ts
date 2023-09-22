@@ -9,7 +9,8 @@ export const ScrollWheelToIndex = (
 };
 
 export const StartListenForWheelPickerScoll = (
-  wheelPickerContainer: HTMLUListElement
+  wheelPickerContainer: HTMLUListElement,
+  onChange?: (selectedItem: string) => void
 ) => {
   let debounceTimer: NodeJS.Timeout;
 
@@ -24,6 +25,20 @@ export const StartListenForWheelPickerScoll = (
       const index = Math.round(wheelPickerContainer.scrollTop / itemHeight);
 
       wheelPickerContainer.scrollTop = index * itemHeight;
+      setHighlightColorForSelectedItem(index, wheelPickerContainer);
+      onChange && onChange(index.toString());
     }, 250);
+  });
+};
+
+const setHighlightColorForSelectedItem = (
+  itemIndex: number,
+  wheelPickerContainer: HTMLUListElement
+) => {
+  const wheelItemsElements = Array.from(wheelPickerContainer.children);
+  wheelItemsElements.forEach((item, index) => {
+    (item as HTMLElement).style.color = index === itemIndex ? "red" : "white";
+    // (item as HTMLElement).style.transform =
+    //   index !== itemIndex ? `perspective(75em) rotateX(38deg)` : "";
   });
 };
