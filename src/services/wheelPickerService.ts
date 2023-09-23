@@ -4,8 +4,12 @@ export const ScrollWheelToIndex = (
   wheelPickerContainer: HTMLUListElement
 ) => {
   if (itemIndex > items.length) return;
-  const wheelItemsElements = Array.from(wheelPickerContainer.children);
-  wheelItemsElements[itemIndex].scrollIntoView();
+  const itemHeight =
+    wheelPickerContainer.children.length > 0
+      ? wheelPickerContainer?.children[0].getBoundingClientRect().height
+      : 32;
+
+  wheelPickerContainer.scrollTop = itemIndex * itemHeight;
 };
 
 export const StartListenForWheelPickerScoll = (
@@ -15,17 +19,16 @@ export const StartListenForWheelPickerScoll = (
   let debounceTimer: NodeJS.Timeout;
 
   wheelPickerContainer?.addEventListener("scroll", function () {
+    const itemHeight =
+      wheelPickerContainer.children.length > 0
+        ? wheelPickerContainer?.children[0].getBoundingClientRect().height
+        : 32;
+
+    const index = Math.round(wheelPickerContainer.scrollTop / itemHeight);
+    setHighlightColorForSelectedItem(index, wheelPickerContainer);
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
-      const itemHeight =
-        wheelPickerContainer.children.length > 0
-          ? wheelPickerContainer?.children[0].getBoundingClientRect().height
-          : 32;
-
-      const index = Math.round(wheelPickerContainer.scrollTop / itemHeight);
-
       wheelPickerContainer.scrollTop = index * itemHeight;
-      setHighlightColorForSelectedItem(index, wheelPickerContainer);
       onChange && onChange(index.toString());
     }, 250);
   });
@@ -38,7 +41,7 @@ const setHighlightColorForSelectedItem = (
   const wheelItemsElements = Array.from(wheelPickerContainer.children);
   wheelItemsElements.forEach((item, index) => {
     (item as HTMLElement).style.color = index === itemIndex ? "red" : "white";
-    // (item as HTMLElement).style.transform =
-    //   index !== itemIndex ? `perspective(75em) rotateX(38deg)` : "";
+    (item as HTMLElement).style.fontWeight =
+      index === itemIndex ? "bold" : "regular";
   });
 };
