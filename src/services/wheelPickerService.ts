@@ -41,7 +41,7 @@ const setHighlightColorForSelectedItem = (
   }
 ) => {
   const defaultColor = "white";
-  const defaultSelectedColor = "red";
+  const defaultSelectedColor = "#00ff8d";
 
   const wheelItemsElements = Array.from(wheelPickerContainer.children);
   wheelItemsElements.forEach((item, index) => {

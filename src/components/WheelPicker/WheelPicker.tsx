@@ -18,7 +18,7 @@ const WheelPicker: React.FC<IWheelPicker> = (props) => {
     selectedColor,
     color,
     isArrows = true,
-    arrowsColor = "white",
+    arrowsColor = "#f01c74",
   } = props;
   const wheelPickerRef = useRef<HTMLUListElement>(null);
 
@@ -44,12 +44,13 @@ const WheelPicker: React.FC<IWheelPicker> = (props) => {
         ref={wheelPickerRef}
         className={styles.wheelPicker}
       >
-        {items.map((item, key) => (
+        {items.map((item, index) => (
           <li
             tabIndex={0}
             id={`${name}_wheel_item_${item}`}
             className={styles.wheelItem}
-            key={key}
+            key={index}
+            onClick={() => ScrollWheelToIndex(index, wheelPickerRef.current!)}
           >
             {item}
           </li>
