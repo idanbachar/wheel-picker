@@ -2,7 +2,11 @@ import "./App.css";
 import TimePickers from "./components/TimePickers/TimePickers";
 
 const App = () => {
-  return <TimePickers />;
+  return (
+    <div className="App-header">
+      <TimePickers />
+    </div>
+  );
 };
 
 export default App;
