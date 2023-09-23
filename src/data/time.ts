@@ -1,4 +1,4 @@
-export const hours = [
+export const hoursData = [
   "00",
   "01",
   "02",
@@ -25,7 +25,7 @@ export const hours = [
   "23",
 ];
 
-export const minutes = [
+export const minutesData = [
   "00",
   "01",
   "02",

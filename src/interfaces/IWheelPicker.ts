@@ -1,6 +1,6 @@
 export interface IWheelPicker {
   name: string;
-  items: string[];
+  items?: string[];
   defaultItemIndex?: number;
   color?: string;
   selectedColor?: string;

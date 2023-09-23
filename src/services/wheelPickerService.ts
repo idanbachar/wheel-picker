@@ -19,20 +19,22 @@ export const StartListenForWheelPickerScoll = (
   wheelPickerContainer?.addEventListener("scroll", function () {
     const itemHeight = getCurrentItemHeight(wheelPickerContainer);
     const index = Math.round(wheelPickerContainer.scrollTop / itemHeight);
-    setHighlightColorForSelectedItem(
+    SetHighlightColorForSelectedItem(
       index,
       wheelPickerContainer,
       colorsProperties
     );
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
+      const itemValue = (wheelPickerContainer.children[index] as HTMLElement)
+        .innerText;
       ScrollWheelToIndex(index, wheelPickerContainer);
-      onChange && onChange(index.toString());
+      onChange && onChange(itemValue);
     }, 250);
   });
 };
 
-const setHighlightColorForSelectedItem = (
+export const SetHighlightColorForSelectedItem = (
   itemIndex: number,
   wheelPickerContainer: HTMLUListElement,
   colorsProperties?: {

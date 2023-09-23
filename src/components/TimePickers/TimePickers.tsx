@@ -1,29 +1,34 @@
-import { hours, minutes } from "../../data/time";
+import { hoursData, minutesData } from "../../data/time";
 import WheelPicker from "../WheelPicker/WheelPicker";
 import styles from "./timepickers.module.css";
+import { useState } from "react";
 
 const TimePickers: React.FC = () => {
+  const date = new Date();
+  const currentMinutes = date.getMinutes();
+  const currentHours = date.getHours();
+
+  const [hours, setHours] = useState(currentHours.toString());
+  const [minutes, setMinutes] = useState(currentMinutes.toString());
+
   return (
     <div>
       <div className={styles.timePickers}>
         <WheelPicker
-          defaultItemIndex={5}
-          items={hours}
+          defaultItemIndex={currentHours}
+          items={hoursData}
           name="hours"
-          onChange={(selectedItem) => {
-            console.log("selectedItem", selectedItem);
-          }}
+          onChange={setHours}
         />
         <span className={styles.colon}>:</span>
         <WheelPicker
-          defaultItemIndex={5}
-          items={minutes}
+          defaultItemIndex={currentMinutes}
+          items={minutesData}
           name="minutes"
-          onChange={(selectedItem) => {
-            console.log("selectedItem", selectedItem);
-          }}
+          onChange={setMinutes}
         />
       </div>
+      <h4>Current Time: {`${hours}:${minutes}`}</h4>
     </div>
   );
 };

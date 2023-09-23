@@ -5,15 +5,17 @@ import {
   ScrollArrowDown,
   ScrollArrowUp,
   ScrollWheelToIndex,
+  SetHighlightColorForSelectedItem,
   StartListenForWheelPickerScoll,
 } from "../../services/wheelPickerService";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { minutesData } from "../../data/time";
 
 const WheelPicker: React.FC<IWheelPicker> = (props) => {
   const {
     name,
-    items,
-    defaultItemIndex,
+    items = minutesData,
+    defaultItemIndex = 0,
     onChange,
     selectedColor,
     color,
@@ -21,19 +23,31 @@ const WheelPicker: React.FC<IWheelPicker> = (props) => {
     arrowsColor = "#f01c74",
   } = props;
   const wheelPickerRef = useRef<HTMLUListElement>(null);
+  const colorsProperties = {
+    selectedColor,
+    color,
+  };
 
   useEffect(() => {
-    ScrollWheelToIndex(defaultItemIndex || 0, wheelPickerRef.current!);
-    StartListenForWheelPickerScoll(wheelPickerRef.current!, onChange, {
-      selectedColor,
-      color,
-    });
+    ScrollWheelToIndex(defaultItemIndex, wheelPickerRef.current!);
+    StartListenForWheelPickerScoll(
+      wheelPickerRef.current!,
+      onChange,
+      colorsProperties
+    );
+    SetHighlightColorForSelectedItem(
+      defaultItemIndex,
+      wheelPickerRef.current!,
+      colorsProperties
+    );
   }, []);
 
   return (
     <div className={styles.wheelContainer}>
       {isArrows && (
         <IoIosArrowUp
+          role={"button"}
+          tabIndex={0}
           color={arrowsColor}
           className={styles.arrow}
           onClick={() => ScrollArrowDown(wheelPickerRef.current!)}
@@ -58,6 +72,8 @@ const WheelPicker: React.FC<IWheelPicker> = (props) => {
       </ul>
       {isArrows && (
         <IoIosArrowDown
+          role={"button"}
+          tabIndex={0}
           color={arrowsColor}
           className={styles.arrow}
           onClick={() => ScrollArrowUp(wheelPickerRef.current!)}
