@@ -49,7 +49,7 @@ export default App;
 
 | Prop               | Type           | Description                                                   |
 | ------------------ | -------------- | ------------------------------------------------------------- |
-| `items`            | Array (Number) | List of options for the wheel picker.                         |
+| `items`            | Array (String) | List of options for the wheel picker.                         |
 | `onChange`         | Function       | Callback function when an option is selected.                 |
 | `defaultItemIndex` | Number         | Default selected item by index.                               |
 | `isArrows`         | Boolean        | Optional, display arrows for wheel movement, true by default. |
