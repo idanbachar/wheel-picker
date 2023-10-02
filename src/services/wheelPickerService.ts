@@ -8,7 +8,7 @@ export const ScrollWheelToIndex = (
 
 export const StartListenForWheelPickerScoll = (
   wheelPickerContainer: HTMLUListElement,
-  onChange?: (selectedItem: string) => void,
+  onChange?: (selectedItem: string, selectedIndex: number) => void,
   colorsProperties?: {
     selectedColor: string | undefined;
     color: string | undefined;
@@ -29,7 +29,7 @@ export const StartListenForWheelPickerScoll = (
       const itemValue = (wheelPickerContainer.children[index] as HTMLElement)
         .innerText;
       ScrollWheelToIndex(index, wheelPickerContainer);
-      onChange && onChange(itemValue);
+      onChange && onChange(itemValue, index);
     }, 250);
   });
 };

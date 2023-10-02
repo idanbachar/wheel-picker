@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IWheelPicker } from "../../interfaces/IWheelPicker";
 import styles from "./wheel-picker.module.css";
 import {
@@ -9,12 +9,11 @@ import {
   StartListenForWheelPickerScoll,
 } from "../../services/wheelPickerService";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { minutesData } from "../../data/time";
 
 const WheelPicker: React.FC<IWheelPicker> = (props) => {
   const {
     name,
-    items = minutesData,
+    items,
     defaultItemIndex = 0,
     onChange,
     selectedColor,
@@ -24,17 +23,23 @@ const WheelPicker: React.FC<IWheelPicker> = (props) => {
     underlineColor = "#a3a6ff",
     isUnderline = true,
   } = props;
+  const [currentWheelItemIndex, setCurrentWheelItemIndex] = useState(-1);
   const wheelPickerRef = useRef<HTMLUListElement>(null);
   const colorsProperties = {
     selectedColor,
     color,
   };
+  const isArrowUpEnabled = currentWheelItemIndex > 0;
+  const isArrowDownEnabled = currentWheelItemIndex < items.length - 1;
 
   useEffect(() => {
     ScrollWheelToIndex(defaultItemIndex, wheelPickerRef.current!);
     StartListenForWheelPickerScoll(
       wheelPickerRef.current!,
-      onChange,
+      (selectedItem, selectedIndex) => {
+        onChange && onChange(selectedItem);
+        setCurrentWheelItemIndex(selectedIndex);
+      },
       colorsProperties
     );
     SetHighlightColorForSelectedItem(
@@ -52,7 +57,13 @@ const WheelPicker: React.FC<IWheelPicker> = (props) => {
           tabIndex={0}
           color={arrowsColor}
           className={styles.arrow}
-          onClick={() => ScrollArrowDown(wheelPickerRef.current!)}
+          onClick={() =>
+            isArrowUpEnabled && ScrollArrowDown(wheelPickerRef.current!)
+          }
+          style={{
+            opacity: isArrowUpEnabled ? 1 : 0.5,
+            cursor: isArrowUpEnabled ? "pointer" : "default",
+          }}
         />
       )}
       <ul
@@ -81,7 +92,13 @@ const WheelPicker: React.FC<IWheelPicker> = (props) => {
           tabIndex={0}
           color={arrowsColor}
           className={styles.arrow}
-          onClick={() => ScrollArrowUp(wheelPickerRef.current!)}
+          onClick={() =>
+            isArrowDownEnabled && ScrollArrowUp(wheelPickerRef.current!)
+          }
+          style={{
+            opacity: isArrowDownEnabled ? 1 : 0.5,
+            cursor: isArrowDownEnabled ? "pointer" : "default",
+          }}
         />
       )}
     </div>

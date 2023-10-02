@@ -12,7 +12,7 @@ const TimePickers: React.FC = () => {
   const [minutes, setMinutes] = useState(currentMinutes.toString());
 
   return (
-    <div>
+    <>
       <div className={styles.timePickers}>
         <WheelPicker
           defaultItemIndex={currentHours}
@@ -29,7 +29,7 @@ const TimePickers: React.FC = () => {
         />
       </div>
       <h4>Current Time: {`${hours}:${minutes}`}</h4>
-    </div>
+    </>
   );
 };
 

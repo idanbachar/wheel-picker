@@ -1,7 +1,7 @@
 import TimePickers from "./components/TimePickers/TimePickers";
 import "./App.css";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="App-header">
       <h2>Wheel Picker</h2>
