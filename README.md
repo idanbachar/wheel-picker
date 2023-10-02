@@ -35,7 +35,7 @@ import WheelPicker from "../WheelPicker/WheelPicker";
 const App: React.FC = () => {
   return (
     <WheelPicker
-      items={[1, 2, 3]}
+      items={["1", "2", "3"]}
       onChange={(selectedItem) => console.log(selectedItem)}
       defaultItemIndex={0}
     />
