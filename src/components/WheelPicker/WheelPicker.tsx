@@ -21,6 +21,8 @@ const WheelPicker: React.FC<IWheelPicker> = (props) => {
     color,
     isArrows = true,
     arrowsColor = "#f01c74",
+    underlineColor = "#a3a6ff",
+    isUnderline = true,
   } = props;
   const wheelPickerRef = useRef<HTMLUListElement>(null);
   const colorsProperties = {
@@ -65,6 +67,9 @@ const WheelPicker: React.FC<IWheelPicker> = (props) => {
             className={styles.wheelItem}
             key={index}
             onClick={() => ScrollWheelToIndex(index, wheelPickerRef.current!)}
+            style={{
+              borderBottom: isUnderline ? `.2rem solid ${underlineColor}` : "",
+            }}
           >
             {item}
           </li>

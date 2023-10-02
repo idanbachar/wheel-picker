@@ -56,3 +56,5 @@ export default App;
 | `arrowsColor`      | String         | Optional, arrows color.                                       |
 | `color`            | String         | Optional, wheel items color when not focused.                 |
 | `selectedColor`    | String         | Optional, wheel selected item color.                          |
+| `isUnderline`      | Boolean        | Optional, display underline at bottom item.                   |
+| `underlineColor`   | String         | Optional, wheel underline item's color.                       |

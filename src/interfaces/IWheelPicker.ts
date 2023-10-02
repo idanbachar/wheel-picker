@@ -7,4 +7,6 @@ export interface IWheelPicker {
   onChange?: (selectedItem: string) => void;
   isArrows?: boolean;
   arrowsColor?: string;
+  isUnderline?: boolean;
+  underlineColor?: string;
 }
