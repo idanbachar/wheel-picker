@@ -3,6 +3,7 @@
 A customizable wheel picker component built with React. Enhance your forms and UI interactions with a visually engaging wheel picker, offering custom CSS styling options to seamlessly integrate with your design.
 
 ![Wheel Picker Demo](./WheelPickerDesktop.gif)
+![Wheel Picker Demo](./WheelPickerMobile.gif)
 
 ## Features
 
